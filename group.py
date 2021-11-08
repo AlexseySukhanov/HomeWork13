@@ -12,7 +12,7 @@ class Group:
             if len(students) > 10:
                 raise IE(len(students), "Amount of students can't be more than 10 ")
         except IE as error:
-            print(error)
+            return error
 
         self.groupname = groupname
         self.group = students
