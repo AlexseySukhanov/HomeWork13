@@ -12,7 +12,7 @@ class Group:
             if len(students) > 10:
                 raise IE(len(students), "Amount of students can't be more than 10 ")
         except IE as error:
-            return error
+            return IE
 
         self.groupname = groupname
         self.group = students
@@ -27,9 +27,20 @@ class Group:
             if self.group[i].idnumber == idnum:
                 return self.group.pop(i)
 
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        if self.index < len(self.group):
+            self.index +=1
+            return self.group[self.index-1]
+        else:
+            raise StopIteration
+
+
 
     def __str__(self):
         s =" ".join([i.surname for i in self.group])
-        # for i in self.group:
-        #     s += str(i.surname)+" "
+
         return s
